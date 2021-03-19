@@ -39,7 +39,7 @@ async def check_flights(fly_from: str, fly_to: str):
             await r.set(key, json.dumps(flight))
 
 
-# @task(timedelta(hours=24), timedelta(seconds=10))
+@task(timedelta(hours=24))
 async def scheduled_pull_flights(_):
     date_from = datetime.now()
     date_to = date_from + timedelta(days=30)
@@ -49,7 +49,7 @@ async def scheduled_pull_flights(_):
     await asyncio.gather(*tasks, return_exceptions=True)
 
 
-# @task(timedelta(minutes=10))
+@task(timedelta(minutes=10), timedelta(minutes=1))
 async def scheduled_check_flights(_):
     tasks = []
     for fly_from, fly_to in DIRECTIONS:

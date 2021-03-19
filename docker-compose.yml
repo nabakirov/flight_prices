@@ -1,0 +1,40 @@
+version: "3.7"
+
+networks:
+  docker-net:
+    driver: bridge
+
+services:
+  redis:
+    restart: always
+    image: redis
+    container_name: redis2
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    networks:
+      - docker-net
+    
+  flight_prices:
+    restart: unless-stopped
+    build: ./
+    container_name: flight_prices
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=1
+      - DEBUG=False
+      - PORT=8000
+    depends_on:
+      - redis
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    networks:
+      - docker-net

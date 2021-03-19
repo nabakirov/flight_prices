@@ -1,4 +1,4 @@
-
+import os
 
 DIRECTIONS = (
     ('ALA', 'TSE'),
@@ -16,8 +16,15 @@ DIRECTIONS = (
 
 
 REDIS_HOST = os.getenv('REDIS_HOST')
-REDIS_PORT = os.getenv('REDIS_PORT')
-REDIS_DB = os.getenv('REDIS_DB')
+REDIS_PORT = int(os.getenv('REDIS_PORT'))
+REDIS_DB = int(os.getenv('REDIS_DB'))
 DEBUG = os.getenv('DEBUG')
-PORT = os.getenv('PORT')
+if DEBUG:
+    if DEBUG in {'True', 'true'}:
+        DEBUG = True
+    else:
+        DEBUG = False
+else:
+    DEBUG = False
+PORT = int(os.getenv('PORT'))
 
