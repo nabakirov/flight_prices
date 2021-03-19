@@ -43,13 +43,7 @@
     ```shell script
     git clone https://github.com/nabakirov/rest-todo.git
     ```
-2. Set environment variables   
-    - REDIS_HOST=127.0.0.1   
-    - REDIS_PORT=6379
-    - REDIS_DB=1
-    - DEBUG=False
-    - PORT=8000  
-3. Install and run
+2. Install and run
     ```shell script
     docker-compose up -d
     ```
@@ -62,7 +56,7 @@
 #### GET */flights*
 ##### access - *public*
 query params   
- - ?fly_from=<CODE>&fly_to=<CODE>   
+ - ?fly_from=CODE&fly_to=CODE   
  
 response
 ```json5
